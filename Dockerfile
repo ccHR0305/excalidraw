@@ -1,4 +1,4 @@
-FROM node:18 AS build
+FROM arm64v8/node:18.17 AS build
 
 WORKDIR /opt/node_app
 
@@ -10,7 +10,7 @@ ARG NODE_ENV=production
 COPY . .
 RUN yarn build:app:docker
 
-FROM nginx:1.21-alpine
+FROM arm64v8/nginx:1.21.3-alpine
 
 COPY --from=build /opt/node_app/build /usr/share/nginx/html
 
